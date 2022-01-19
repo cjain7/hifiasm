@@ -554,7 +554,7 @@ uint32_t get_het_cnt(haplotype_evdience_alloc *hap)
 {
     uint32_t i, cnt;
     for (i = cnt = 0; i < hap->snp_stat.n; i++) {
-        if(hap->snp_stat.a[i].score == 1 && (!(hap->snp_stat.a[i].occ_0 < 2 || hap->snp_stat.a[i].occ_1 < 2))) {
+        if(hap->snp_stat.a[i].score == 1 && hap->snp_stat.a[i].occ_0 >= 2 && hap->snp_stat.a[i].occ_0 >= asm_opt.hom_cov / 4 && hap->snp_stat.a[i].occ_1 >= 2 && hap->snp_stat.a[i].occ_1 >= asm_opt.hom_cov / 4 && hap->snp_stat.a[i].overlap_num < 1.5 * asm_opt.hom_cov) {
             cnt++;
         }
     }
